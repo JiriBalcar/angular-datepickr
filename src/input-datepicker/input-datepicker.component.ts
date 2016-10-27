@@ -22,6 +22,7 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
 };
 
 @Component({
+  moduleId: module.id,
   selector: 'jb-input-datepicker',
   templateUrl: './input-datepicker.component.html',
   styleUrls: ['./input-datepicker.component.css'],

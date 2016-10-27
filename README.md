@@ -1,4 +1,4 @@
-# ng2-datepicker
+# Angular2-datepickr
 Angular2 Datepicker Component
 
 ***angular2-datepickr*** is a datepicker component for Angular2.
