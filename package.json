@@ -1,6 +1,6 @@
 {
   "name": "angular2-datepickr",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Angular2 Datepicker",
   "main": "ng2-datepicker.ts",
   "repository": {
