@@ -25,7 +25,7 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  moduleId: module.id,
+  //moduleId: module.id,
   selector: 'jb-input-datepicker',
   templateUrl: './input-datepicker.component.html',
   styleUrls: ['./input-datepicker.component.css'],
@@ -136,6 +136,7 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
     }
     let daysInMonth = this.date.daysInMonth();
     let rows = Math.ceil((offset + daysInMonth) / 7);
+
     this.weeks = [];
 
     let currentDate = firstDay.subtract(offset, 'day');
@@ -168,7 +169,7 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
     this.value = today.format(this.format);
     this.viewDate = today.format(this.viewFormat);
     this.generateCalendar(true);
-     this.opened = false;
+    this.opened = false;
   }
 
   selectDate(e: MouseEvent, d: CalendarDate) {

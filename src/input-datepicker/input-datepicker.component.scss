@@ -44,24 +44,24 @@
 
         span {
           text-align: center;
-          font-size: 2em;
+          font-size: 1.2em;
         }
       }
 
       table {
         width: 100%;
-        border-colapse: colapse;
+        border-collapse: collapse;
         text-align: center;
       }
 
       .day-names {
         background: #7C4DFF;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 5px;
+        padding-right: 5px;
 
         th {
           width: calc(100% / 7);
-          font-size: 1.1em;
+          font-size: 1em;
           text-align: center;
           padding-top: 5px;
           padding-bottom: 5px;
@@ -70,8 +70,8 @@
       }
 
       .days {
-        margin-left: 1rem;
-        margin-right: 1rem;
+        margin-left: 5px;
+        margin-right: 5px;
 
         &.weekend-highlight .day.weekend {
           background-color: rgba(0, 0, 0, 0.1);
@@ -88,7 +88,7 @@
           text-align: center;
 
           span {
-            font-size: 1.2em;
+            font-size: 1em;
             display: inline-block;
             text-align: center;
             height: 2em;
