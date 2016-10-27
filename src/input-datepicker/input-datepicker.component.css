@@ -1,0 +1,81 @@
+:host {
+  position: relative;
+}
+
+:host .calendar-container {
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  top: 100%;
+  color: #fff;
+  background: #613bbb;
+  display: inline-block;
+  opacity: 0;
+}
+
+:host .calendar-container .calendar-top {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+:host .calendar-container .calendar-top i {
+  cursor: pointer;
+}
+
+:host .calendar-container .calendar-top span {
+  text-align: center;
+}
+
+:host .calendar-container .day-names {
+  height: 23px;
+  background: #7C4DFF;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+:host .calendar-container .day-names span {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  text-align: center;
+  display: block;
+  float: left;
+  width: calc(100% / 7);
+  height: 2rem;
+  color: #fff;
+}
+
+:host .calendar-container .days {
+  padding: 5px 0;
+  margin-bottom: 15px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+:host .calendar-container .days span {
+  font-size: 2rem;
+  display: block;
+  float: left;
+  text-align: center;
+  height: 3rem;
+  line-height: 3rem;
+  width: calc((100% / 7) - 4px);
+  cursor: pointer;
+  border-radius: 1.5rem;
+  margin: 2px;
+}
+
+:host .calendar-container .days span.today {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+:host .calendar-container .days span:not(.nohover):hover,
+:host .calendar-container .days span.is-active,
+:host .calendar-container .days span.is-active.today {
+  background: #fff;
+  color: #613bbb;
+}

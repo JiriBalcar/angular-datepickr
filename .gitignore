@@ -1,0 +1,14 @@
+**/*.js
+**/*.js.map
+**/*.d.ts
+
+npm-debug.log/
+
+node_modules/
+typings/
+
+/compiled
+*.metadata.json
+*.map.js
+*.js
+**/*.tgz

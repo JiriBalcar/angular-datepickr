@@ -1,0 +1,23 @@
+<div [class]="class">
+  <input type="text" #input [(ngModel)]="viewDate" (click)="toggle()">
+  <div class="calendar-container" [@contentAnimation]="opened">
+    <div class="calendar-top">
+      <i class="material-icons" (click)="prevMonth()" tabindex="1">&#xE5CB;</i>
+      <span>{{ date.format('MMMM YYYY') }}</span>
+      <i class="material-icons" (click)="nextMonth()" tabindex="2">&#xE5CC;</i>
+    </div>
+    <div class="day-names">
+      <span *ngFor="let name of weekDayNames">{{name}}</span>
+    </div>
+    <div class="days">
+      <span *ngFor="let d of days; let i = index;" 
+            (click)="selectDate($event, i)"
+            [class.today]="d.today"
+            [class.nohover]="!d.day"
+            [class.weekend]="d.weekend"
+            [class.is-active]="d.selected">
+        {{ d.day }}
+      </span>
+    </div>
+  </div>
+</div>
