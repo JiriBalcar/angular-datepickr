@@ -1,14 +1,17 @@
 import {
-  Component, ElementRef, forwardRef, OnInit, Input, ViewChild,
+  Component, ElementRef, forwardRef, OnInit, Optional, Input, ViewChild,
   trigger, transition, style, animate, state
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Angular2DatepickerOptions } from '../datepicker-options';
+
 import * as moment from 'moment';
 
 export interface CalendarDate {
   day: number;
   month: number;
   year: number;
+  differentMonth: boolean;
   enabled: boolean;
   today: boolean;
   weekend: boolean;
@@ -46,6 +49,10 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
   @Input() format: string;
   @Input() viewFormat: string;
   @Input() firstWeekdaySunday: boolean;
+  @Input() todayString: string;
+  @Input() todayButtonEnabled: boolean;
+  @Input() todayHighlight: boolean;
+  @Input() weekendHighlight: boolean;
   @ViewChild('input') inputEl: ElementRef;
 
   public date: any = moment();
@@ -53,8 +60,9 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
   private onTouched: Function;
   private el: Element;
   public viewDate: string = null;
-  public days: CalendarDate[] = [];
+  public weeks: Array<{ rowId?: number; days?: Array<CalendarDate> }>;
   public weekDayNames: Array<string>;
+  public days: Array<any> = [];
 
   private onTouchedCallback: () => void = () => { };
   private onChangeCallback: (_: any) => void = () => { };
@@ -62,9 +70,9 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
   private closePickerOnOutsideClick = (event: MouseEvent) => this.close(event);
   private closePickerOnTab = (event: KeyboardEvent) => this.closeOnTab(event);
 
-  constructor(private elRef: ElementRef) {
+  constructor(private elRef: ElementRef,
+    @Optional() private options: Angular2DatepickerOptions) {
     this.weekDayNames = moment.weekdaysShort();
-    console.log(moment.locale());
   }
 
   get value(): any {
@@ -79,63 +87,94 @@ export class InputDatePickerComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this.opened = this.opened || false;
-    this.format = this.format || 'DD.MM.YYYY';
-    this.viewFormat = this.viewFormat || 'DD.MM.YYYY';
-    this.firstWeekdaySunday = this.firstWeekdaySunday || false;
     if (!this.firstWeekdaySunday) {
       this.weekDayNames.splice(6, 0, this.weekDayNames.splice(0, 1)[0]);
     }
-    this.generateCalendar(true);
+    if (this.options) {
+      if (typeof this.format === 'undefined') {
+        this.format = this.options.format;
+      }
+      if (typeof this.viewFormat === 'undefined') {
+        this.viewFormat = this.options.viewFormat;
+      }
+      if (typeof this.firstWeekdaySunday === 'undefined') {
+        this.firstWeekdaySunday = this.options.firstWeekdaySunday;
+      } else {
+        this.firstWeekdaySunday = this.firstWeekdaySunday.toString() === 'true';
+      }
+      if (typeof this.todayString === 'undefined') {
+        this.todayString = this.options.todayString;
+      }
+      if (typeof this.todayButtonEnabled === 'undefined') {
+        this.todayButtonEnabled = this.options.todayButtonEnabled;
+      } else {
+        this.todayButtonEnabled = this.todayButtonEnabled.toString() === 'true';
+      }
+      if (typeof this.todayHighlight === 'undefined') {
+        this.todayHighlight = this.options.todayHighlight;
+      } else {
+        this.todayHighlight = this.todayHighlight.toString() === 'true';
+      }
+      if (typeof this.weekendHighlight === 'undefined') {
+        this.weekendHighlight = this.options.weekendHighlight;
+      } else {
+        this.weekendHighlight = this.weekendHighlight.toString() === 'true';
+      }
+    }
   }
 
   generateCalendar(selectedMonthFlag?: boolean) {
     this.date = selectedMonthFlag && this.value ? moment(this.value, this.format) : moment(this.date);
     let month = this.date.month();
     let year = this.date.year();
-    let n: number = 1;
-    let firstWeekDay: number = (this.firstWeekdaySunday) ? this.date.date(2).day() : this.date.date(1).day();
-
-    if (firstWeekDay !== 1) {
-      n -= (firstWeekDay + 6) % 7;
+    let firstDay = moment(`01.${month + 1}.${year}`, 'DD.MM.YYYY');
+    let offset = null;
+    if (this.firstWeekdaySunday) {
+      offset = firstDay.day() === 0 ? 7 : firstDay.day();
+    } else {
+      offset = firstDay.day() === 0 ? 6 : firstDay.day() - 1;
     }
+    let daysInMonth = this.date.daysInMonth();
+    let rows = Math.ceil((offset + daysInMonth) / 7);
+    this.weeks = [];
 
-    this.days = [];
+    let currentDate = firstDay.subtract(offset, 'day');
     let selectedDate = moment(this.value, this.viewFormat);
-    for (let i = n; i <= this.date.endOf('month').date(); i += 1) {
-      let currentDate = moment(`${i}.${month + 1}.${year}`, 'DD.MM.YYYY');
-      let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
-      let weekend = (moment(currentDate).day() == 6) || (moment(currentDate).day() == 0);
-      let selected = (selectedDate.isSame(currentDate, 'day')) ? true : false;
 
-      if (i > 0) {
-        this.days.push({
-          day: i,
-          month: month + 1,
-          year: year,
+    for (let i = 1; i <= rows; i += 1) {
+      let days = [];
+      for (let i = 1; i <= 7; i += 1) {
+        let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
+        let weekend = (moment(currentDate).day() == 6) || (moment(currentDate).day() == 0);
+        let selected = (selectedDate.isSame(currentDate, 'day')) ? true : false;
+        days.push({
+          day: currentDate.date(),
+          month: currentDate.month() + 1,
+          year: currentDate.year(),
           enabled: true,
+          differentMonth: month === currentDate.month(),
           today: today,
           weekend: weekend,
           selected: selected
         });
-      } else {
-        this.days.push({
-          day: null,
-          month: null,
-          year: null,
-          enabled: false,
-          today: false,
-          weekend: weekend,
-          selected: false
-        });
+        currentDate.add(1, 'day');
       }
+      this.weeks.push({ rowId: i, days: days });
     }
   }
 
-  selectDate(e: MouseEvent, i: number) {
+  setToday() {
+    let today = moment();
+    this.value = today.format(this.format);
+    this.viewDate = today.format(this.viewFormat);
+    this.generateCalendar(true);
+     this.opened = false;
+  }
+
+  selectDate(e: MouseEvent, d: CalendarDate) {
     e.preventDefault();
 
-    let date: CalendarDate = this.days[i];
-    let selectedDate = moment(`${date.day}.${date.month}.${date.year}`, 'DD.MM.YYYY');
+    let selectedDate = moment(`${d.day}.${d.month}.${d.year}`, 'DD.MM.YYYY');
     this.value = selectedDate.format(this.format);
     this.viewDate = selectedDate.format(this.viewFormat);
     this.opened = false;

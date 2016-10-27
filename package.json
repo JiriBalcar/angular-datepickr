@@ -11,8 +11,8 @@
     "url": "https://github.com/JiriBalcar/angular2-datepicker/issues"
   },
   "scripts": {
-    "prepublish": "ngc",
-    "watch": "ngc -w",
+    "prepublish": "npm run build-css && ngc",
+    "watch": "nodemon -i **/*.d.ts -w src -e scss,ts -x \"npm run prepublish\"",
     "build-css": "node-sass src -o src --output-style compressed -q"
   },
   "keywords": [
@@ -35,6 +35,7 @@
     "@types/node": "^6.0.42",
     "moment": "^2.15.2",
     "node-sass": "^3.10.1",
+    "nodemon": "^1.11.0",
     "rxjs": "5.0.0-beta.12",
     "typescript": "^2.0.3",
     "zone.js": "0.6.25"
