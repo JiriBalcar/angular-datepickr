@@ -26,7 +26,7 @@ export interface Week {
 }
 
 @Component({
-  moduleId: module.id,
+  // moduleId: module.id,
   selector: 'jb-datepicker-container',
   templateUrl: './datepicker-container.component.html',
   styleUrls: ['./datepicker-container.component.css'],
@@ -37,7 +37,7 @@ export interface Week {
         animate('200ms ease-in')
       ]),
       transition('* => void', [
-        animate('300ms ease-out', style({opacity: '0'}))
+        animate('300ms ease-out', style({ opacity: '0' }))
       ])
     ])
   ]
@@ -88,17 +88,12 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
     this.inputDate = date.isValid() ? date.format('DD.MM.YYYY') : value;
   }
 
-  ngOnInit() {
-    if (!this.firstWeekdaySunday) {
-      this.weekDayNames.splice(6, 0, this.weekDayNames.splice(0, 1)[0]);
-    }
-
-    if (this.modalMediaQuery) {
-      this.mq = window.matchMedia(`(${this.modalMediaQuery})`);
-    }
-  }
+  ngOnInit() {}
 
   generateCalendar(selectedMonthFlag?: boolean) {
+     if (!this.firstWeekdaySunday) {
+      this.weekDayNames.splice(6, 0, this.weekDayNames.splice(0, 1)[0]);
+    }
     this.date = selectedMonthFlag && this.value ? moment(this.value, 'DD.MM.YYYY') : moment(this.date);
     let month = this.date.month();
     let year = this.date.year();
@@ -168,7 +163,8 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
   open() {
     this.opened = true;
     this.generateCalendar(true);
-    if (this.mq) {
+    if (this.modalMediaQuery) {
+      this.mq = window.matchMedia(`(${this.modalMediaQuery})`);
       this.mqMatches = this.mq.matches ? true : false;
       this.mq.addListener(this.watchMediaQuery);
     }
@@ -176,10 +172,14 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
 
   close() {
     this.opened = false;
-    this.mq.removeListener(this.watchMediaQuery);
+    if (this.mq) {
+      this.mq.removeListener(this.watchMediaQuery);
+    }
   }
 
   ngOnDestroy() {
-    this.mq.removeListener(this.watchMediaQuery);
+    if (this.mq) {
+      this.mq.removeListener(this.watchMediaQuery);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, forwardRef, OnInit, OnDestroy, Optional, Input, ViewChild, ContentChildren,
+  Component, ElementRef, forwardRef, OnInit, AfterViewInit, OnDestroy, Optional, Input, ViewChild, ContentChildren,
   Injectable,
   trigger, transition, style, animate, state
 } from '@angular/core';
@@ -22,15 +22,15 @@ export interface CalendarDate {
 }
 
 @Component({
-    selector: '',
-    template: ''
+  selector: '',
+  template: ''
 })
-export class DatePicker implements ControlValueAccessor, OnInit, OnDestroy {
+export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   @Input() class: string;
   @Input() opened: boolean;
   @Input() options: Angular2DatepickerOptions = new Angular2DatepickerOptions();
-  @ViewChild('input') inputEl: ElementRef;
-  @ViewChild(DatePickerContainerComponent) datePicker: DatePickerContainerComponent;
+
+  protected datePicker: DatePickerContainerComponent;
 
   public date: any = moment();
   private onChange: Function;
@@ -69,10 +69,6 @@ export class DatePicker implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.datePicker.value = this.value;
-    if (this.opened) {
-      this.datePicker.open();
-    }
     if (this.opts) {
       if (typeof this.options.format === 'undefined') {
         this.options.format = this.opts.format;
@@ -112,6 +108,13 @@ export class DatePicker implements ControlValueAccessor, OnInit, OnDestroy {
         this.options.closeOnSelect = this.options.closeOnSelect.toString() === 'true';
       }
     }
+  }
+
+  ngAfterViewInit() {
+    this.datePicker.value = this.value;
+    if (this.opened) {
+      this.datePicker.open();
+    }
     this.datePicker.mergeOptions(this.options);
   }
 
@@ -132,9 +135,6 @@ export class DatePicker implements ControlValueAccessor, OnInit, OnDestroy {
 
   toggle() {
     if (!this.datePicker.opened) {
-      if (this.viewDate) {
-        this.inputEl.nativeElement.setSelectionRange(0, this.viewDate.length);
-      }
       this.open();
     } else {
       //this.close();
