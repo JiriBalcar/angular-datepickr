@@ -9,8 +9,16 @@ export class Angular2DatepickerOptions {
   todayButtonEnabled: boolean = true;
   todayHighlight: boolean = true;
   weekendHighlight: boolean = true;
+  closeOnSelect: boolean = true;
+  modalMediaQuery: string;
 
-  constructor(options: Object) {
-    Object.assign(this, options);
+  constructor(options?: Object) {
+    if (options) {
+      Object.assign(this, options);
+    }
+  }
+
+  merge(options: Object) {
+    return Object.assign({}, this, options);
   }
 }

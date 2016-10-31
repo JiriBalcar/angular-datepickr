@@ -8,22 +8,30 @@ import { DatePicker } from '../datepicker/datepicker';
 
 export const CALENDAR_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => InputDatePickerComponent),
+  useExisting: forwardRef(() => TextDatePickerComponent),
   multi: true
 };
 
 @Component({
   moduleId: module.id,
-  selector: 'jb-input-datepicker',
-  templateUrl: './input-datepicker.component.html',
-  styleUrls: ['./input-datepicker.component.css'],
+  selector: 'jb-text-datepicker',
+  templateUrl: './text-datepicker.component.html',
+  styleUrls: ['./text-datepicker.component.css'],
   providers: [CALENDAR_VALUE_ACCESSOR]
 })
-export class InputDatePickerComponent extends DatePicker {
+export class TextDatePickerComponent extends DatePicker {
 
   constructor(protected elRef: ElementRef,
     @Optional() protected opts: Angular2DatepickerOptions) {
     super(elRef, opts);
+  }
+
+  toggle() {
+    if (!this.datePicker.opened) {
+      this.open();
+    } else {
+      //this.close();
+    }
   }
 
 }

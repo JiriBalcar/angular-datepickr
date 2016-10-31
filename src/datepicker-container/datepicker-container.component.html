@@ -1,0 +1,29 @@
+<div class="calendar-wrapper" [class.modal]="mqMatches" *ngIf="opened" [@contentAnimation]="opened">
+  <div class="overlay" (click)="close()"></div>
+  <div class="calendar-container">
+    <div class="calendar-top">
+      <i class="material-icons" (click)="prevMonth()" tabindex="1">&#xE5CB;</i>
+      <span>{{ date.format('MMMM YYYY') }}</span>
+      <i class="material-icons" (click)="nextMonth()" tabindex="2">&#xE5CC;</i>
+    </div>
+    <table>
+      <thead>
+        <tr class="day-names">
+          <th *ngFor="let name of weekDayNames">{{name}}</th>
+        </tr>
+      </thead>
+      <tbody class="days" [class.weekend-highlight]="weekendHighlight" [class.today-highlight]="todayHighlight">
+        <tr *ngFor="let week of weeks">
+          <td *ngFor="let d of week.days" class="day" [class.weekend]="d.weekend">
+            <span (click)="selectDate($event, d)" [class.today]="d.today" [class.different-month]="!d.differentMonth" [class.is-active]="d.selected">{{d.day}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="7" class="today-button-wrapper">
+            <button (click)="setToday()">{{todayString}}</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

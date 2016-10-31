@@ -1,0 +1,160 @@
+:host {
+  .calendar-wrapper {
+    position: absolute;
+    z-index: 9999;
+    min-width: 300px;
+
+    .overlay {
+      display: none;
+    }
+
+    .calendar-container {
+      min-width: 90%;
+      z-index: 999;
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+      .calendar-top {
+        width: 100%;
+        min-height: 40px;
+        color: #fff;
+        background-color: #613bbb;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        //font-size: 1.4em;
+
+        i {
+          cursor: pointer;
+          padding: 0.5em;
+          outline: none;
+        }
+
+        span {
+          text-align: center;
+          font-size: 1.2em;
+        }
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      .day-names {
+        background: #7C4DFF;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        th {
+          width: calc(100% / 7);
+          font-size: 1em;
+          text-align: center;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          color: #fff;
+        }
+      }
+
+      .days {
+        margin-left: 5px;
+        margin-right: 5px;
+
+        &.weekend-highlight .day.weekend {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.today-highlight .day span.today {
+          font-weight: bold;
+          color: #fff;
+          background: rgba(#613bbb, 0.4);
+        }
+
+        .day {
+          cursor: pointer;
+          text-align: center;
+
+          span {
+            font-size: 1em;
+            display: inline-block;
+            text-align: center;
+            height: 2em;
+            width: 2em;
+            line-height: 2em;
+            border-radius: 50%;
+            margin: 2px;
+
+            &.different-month {
+              color: #ccc;
+            }
+
+            &:hover,
+            &.is-active,
+            &.is-active.today {
+              background: #613bbb;
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      .today-button-wrapper {
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+        button {
+          display: flex;
+          margin: auto;
+          align-items: center;
+          align-self: center;
+          justify-content: center;
+          margin-bottom: 0;
+          font-weight: 400;
+          text-align: center;
+          vertical-align: middle;
+          cursor: pointer;
+          background-image: none;
+          border: 1px solid transparent;
+          white-space: nowrap;
+          padding: 5px 10px;
+          font-size: 1em;
+          line-height: 1.4;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          outline: none;
+        }
+      }
+    }
+
+    &.modal {
+      display: flex;
+      flex-flow: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        z-index: 900;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .calendar-container {}
+    }
+  }
+}

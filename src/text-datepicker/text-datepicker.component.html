@@ -1,4 +1,4 @@
 <div class="datepicker-wrapper">
-  <input type="text" #input [(ngModel)]="viewDate" (click)="toggle()" [placeholder]="options.viewFormat">
+  <p (click)="toggle()">{{viewDate || 'DATUM'}}</p>
   <jb-datepicker-container (onDateSelected)="onDateSelected($event)"></jb-datepicker-container>
 </div>
