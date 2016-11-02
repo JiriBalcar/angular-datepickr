@@ -72,7 +72,6 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
   constructor(private elRef: ElementRef,
     private zone: NgZone,
     @Optional() private options: Angular2DatepickerOptions) {
-    this.weekDayNames = moment.weekdaysShort();
   }
 
   get value(): any {
@@ -91,7 +90,8 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {}
 
   generateCalendar(selectedMonthFlag?: boolean) {
-     if (!this.firstWeekdaySunday) {
+    this.weekDayNames = moment.weekdaysShort();
+    if (!this.firstWeekdaySunday) {
       this.weekDayNames.splice(6, 0, this.weekDayNames.splice(0, 1)[0]);
     }
     this.date = selectedMonthFlag && this.value ? moment(this.value, 'DD.MM.YYYY') : moment(this.date);

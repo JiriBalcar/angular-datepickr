@@ -1,5 +1,5 @@
 import {
-  Component, ElementRef, forwardRef, Optional, ViewChild,
+  Component, ElementRef, forwardRef, Optional, ViewChild, Input,
   trigger, transition, style, animate, state
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
@@ -22,6 +22,7 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
 })
 export class TextDatePickerComponent extends DatePicker {
    @ViewChild(DatePickerContainerComponent) datePicker: DatePickerContainerComponent;
+   @Input() options: any;
 
   constructor(protected elRef: ElementRef,
     @Optional() protected opts: Angular2DatepickerOptions) {
