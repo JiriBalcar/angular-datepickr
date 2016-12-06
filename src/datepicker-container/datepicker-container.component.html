@@ -2,9 +2,21 @@
   <div class="overlay" (click)="close()"></div>
   <div class="calendar-container">
     <div class="calendar-top">
-      <i class="material-icons" (click)="prevMonth()" tabindex="1">&#xE5CB;</i>
-      <span>{{ date.format('MMMM YYYY') }}</span>
-      <i class="material-icons" (click)="nextMonth()" tabindex="2">&#xE5CC;</i>
+      <div class="top-chevron" (click)="prevMonth()">
+        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </div>
+      <div class="top-month-year">
+        <span>{{ date.format('MMMM YYYY') }}</span>
+      </div>
+      <div class="top-chevron" (click)="nextMonth()">
+        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </div>
     </div>
     <table>
       <thead>
@@ -12,7 +24,7 @@
           <th *ngFor="let name of weekDayNames">{{name}}</th>
         </tr>
       </thead>
-      <tbody class="days" [class.weekend-highlight]="weekendHighlight" [class.today-highlight]="todayHighlight">
+      <tbody class="days" [class.weekend-highlight]="options.weekendHighlight" [class.today-highlight]="options.todayHighlight">
         <tr *ngFor="let week of weeks">
           <td *ngFor="let d of week.days" class="day" [class.weekend]="d.weekend">
             <span (click)="selectDate($event, d)" [class.today]="d.today" [class.different-month]="!d.differentMonth" [class.is-active]="d.selected">{{d.day}}</span>
@@ -20,7 +32,7 @@
         </tr>
         <tr>
           <td colspan="7" class="today-button-wrapper">
-            <button type="button" (click)="setToday()">{{todayString}}</button>
+            <button type="button" (click)="setToday()">{{options.todayString}}</button>
           </td>
         </tr>
       </tbody>

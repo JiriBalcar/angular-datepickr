@@ -15,7 +15,7 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  // moduleId: module.id,
+  //moduleId: module.id,
   selector: 'jb-input-datepicker',
   templateUrl: './input-datepicker.component.html',
   styleUrls: ['./input-datepicker.component.css'],
@@ -31,12 +31,14 @@ export class InputDatePickerComponent extends DatePicker {
     super(elRef, opts);
   }
 
-  toggle() {
+  toggle(event?: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
     if (!this.datePicker.opened) {
       if (this.viewDate) {
         this.inputEl.nativeElement.setSelectionRange(0, this.viewDate.length);
       }
-      this.open();
+      this.open(event);
     } else {
       //this.close();
     }

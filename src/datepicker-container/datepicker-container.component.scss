@@ -3,17 +3,14 @@
     position: absolute;
     z-index: 9999;
     min-width: 300px;
-
     .overlay {
       display: none;
     }
-
     .calendar-container {
       min-width: 90%;
       z-index: 999;
       background-color: #fff;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-
       .calendar-top {
         width: 100%;
         min-height: 40px;
@@ -23,32 +20,34 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         //font-size: 1.4em;
-
-        i {
+        .top-chevron {
           cursor: pointer;
           padding: 0.5em;
           outline: none;
+          svg {
+            vertical-align: middle;
+          }
         }
-
-        span {
-          text-align: center;
-          font-size: 1.2em;
+        .top-month-year {
+          padding: 0.5em;
+          outline: none;
+          span {
+            text-align: center;
+            font-size: 1.2em;
+            vertical-align: middle;
+          }
         }
       }
-
       table {
         width: 100%;
         border-collapse: collapse;
         text-align: center;
       }
-
       .day-names {
         background: #7C4DFF;
         padding-left: 5px;
         padding-right: 5px;
-
         th {
           width: calc(100% / 7);
           font-size: 1em;
@@ -58,25 +57,20 @@
           color: #fff;
         }
       }
-
       .days {
         margin-left: 5px;
         margin-right: 5px;
-
         &.weekend-highlight .day.weekend {
           background-color: rgba(0, 0, 0, 0.1);
         }
-
         &.today-highlight .day span.today {
           font-weight: bold;
           color: #fff;
           background: rgba(#613bbb, 0.4);
         }
-
         .day {
           cursor: pointer;
           text-align: center;
-
           span {
             font-size: 1em;
             display: inline-block;
@@ -86,11 +80,9 @@
             line-height: 2em;
             border-radius: 50%;
             margin: 2px;
-
             &.different-month {
               color: #ccc;
             }
-
             &:hover,
             &.is-active,
             &.is-active.today {
@@ -100,11 +92,9 @@
           }
         }
       }
-
       .today-button-wrapper {
         padding-bottom: 5px;
         padding-top: 5px;
-
         button {
           display: flex;
           margin: auto;
@@ -129,7 +119,6 @@
         }
       }
     }
-
     &.modal {
       display: flex;
       flex-flow: column;
@@ -140,7 +129,6 @@
       height: 100%;
       justify-content: center;
       align-items: center;
-
       .overlay {
         position: absolute;
         top: 0;
@@ -153,7 +141,6 @@
         align-items: center;
         background-color: rgba(0, 0, 0, 0.7);
       }
-
       .calendar-container {}
     }
   }

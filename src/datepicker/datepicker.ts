@@ -28,7 +28,7 @@ export interface CalendarDate {
 export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   @Input() class: string;
   @Input() opened: boolean;
-  @Input() options: Angular2DatepickerOptions = new Angular2DatepickerOptions();
+  @Input() options: Angular2DatepickerOptions = {};
 
   protected datePicker: DatePickerContainerComponent;
 
@@ -108,6 +108,7 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
         this.options.closeOnSelect = this.options.closeOnSelect.toString() === 'true';
       }
     }
+    this.datePicker.mergeOptions(this.options);
   }
 
   ngAfterViewInit() {
@@ -115,7 +116,6 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
     if (this.opened) {
       this.datePicker.open();
     }
-    this.datePicker.mergeOptions(this.options);
   }
 
   writeValue(value: any) {
@@ -147,7 +147,8 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
     }
   }
 
-  open() {
+  open(event?: MouseEvent) {
+    event.preventDefault();
     this.datePicker.open();
     window.addEventListener('click', this.closePickerOnOutsideClick, true);
     window.addEventListener("keydown", this.closePickerOnTab, true);
