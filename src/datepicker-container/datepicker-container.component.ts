@@ -151,8 +151,8 @@ export class DatePickerContainerComponent implements OnDestroy {
     open() {
         this.opened = true;
         this.generateCalendar(true);
-        if (this.modalMediaQuery) {
-            this.mq = window.matchMedia(`(${this.modalMediaQuery})`);
+        if (this.options.modalMediaQuery) {
+            this.mq = window.matchMedia(`(${this.options.modalMediaQuery})`);
             this.mqMatches = this.mq.matches ? true : false;
             this.mq.addListener(this.watchMediaQuery);
         }
