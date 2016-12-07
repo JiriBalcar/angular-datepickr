@@ -13,3 +13,5 @@ typings/
 *.map.js
 *.js
 **/*.tgz
+
+.vscode

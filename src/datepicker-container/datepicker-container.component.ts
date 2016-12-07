@@ -86,7 +86,7 @@ export class DatePickerContainerComponent implements OnDestroy {
         this.date = selectedMonthFlag && this.inputDate ? this.inputDate.clone() : moment(this.date);
         let month = this.date.month();
         let year = this.date.year();
-        let firstDay = moment(`01.${month + 1}.${year}`, 'DD.MM.YYYY');
+        let firstDay = this.date.clone().startOf('month');
         let offset = null;
         if (this.firstWeekdaySunday) {
             offset = firstDay.day() === 0 ? 7 : firstDay.day();
