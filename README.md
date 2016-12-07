@@ -13,6 +13,9 @@ Modal
 
 ## Installation
 
+Required libraries:
+***moment.js***
+
 Install angular2-datepickr via `npm`
 
 ````shell
@@ -21,7 +24,7 @@ npm install angular2-datepickr --save
 
 ## Usage
 ```javascript
-import { Angular2DatepickerModule, Angular2DatepickerOptions } from 'angular2-datepickr/angular2-datepickr';
+import { Angular2DatepickerModule } from 'angular2-datepickr/angular2-datepickr';
 
 @NgModule({
     declarations: [

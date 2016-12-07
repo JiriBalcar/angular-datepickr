@@ -42,13 +42,13 @@ export interface Week {
         ])
     ]
 })
-export class DatePickerContainerComponent implements OnInit, OnDestroy {
+export class DatePickerContainerComponent implements OnDestroy {
     @Output() onDateSelected = new EventEmitter();
 
     public opened: boolean = false;
-    public date: any = moment();
+    public date: moment.Moment = moment();
     private el: Element;
-    private inputDate: string = null;
+    public inputDate: moment.Moment;
     public weeks: Array<Week>;
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
@@ -74,27 +74,16 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
         private zone: NgZone) {
     }
 
-    get value(): any {
-        return this.inputDate;
-    }
-
     mergeOptions(options: Angular2DatepickerOptions) {
         Object.assign(this.options, options);
     }
-
-    set value(value: any) {
-        let date = (value instanceof moment) ? value : moment(value, this.options.format);
-        this.inputDate = date.isValid() ? date.format(this.options.format) : value;
-    }
-
-    ngOnInit() { }
 
     generateCalendar(selectedMonthFlag?: boolean) {
         this.weekDayNames = moment.weekdaysShort();
         if (!this.firstWeekdaySunday) {
             this.weekDayNames.splice(6, 0, this.weekDayNames.splice(0, 1)[0]);
         }
-        this.date = selectedMonthFlag && this.value ? moment(this.value, this.options.format) : moment(this.date);
+        this.date = selectedMonthFlag && this.inputDate ? this.inputDate.clone() : moment(this.date);
         let month = this.date.month();
         let year = this.date.year();
         let firstDay = moment(`01.${month + 1}.${year}`, 'DD.MM.YYYY');
@@ -110,14 +99,14 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
         this.weeks = [];
 
         let currentDate = firstDay.subtract(offset, 'day');
-        let selectedDate = moment(this.value, this.options.format);
+        let selectedDate = this.inputDate;
 
         for (let i = 1; i <= rows; i += 1) {
             let days = [];
             for (let i = 1; i <= 7; i += 1) {
                 let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
                 let weekend = (moment(currentDate).day() == 6) || (moment(currentDate).day() == 0);
-                let selected = (selectedDate.isSame(currentDate, 'day')) ? true : false;
+                let selected = (selectedDate && selectedDate.isSame(currentDate, 'day')) ? true : false;
                 days.push({
                     day: currentDate.date(),
                     month: currentDate.month() + 1,
@@ -136,16 +125,15 @@ export class DatePickerContainerComponent implements OnInit, OnDestroy {
 
     setToday() {
         let today = moment();
-        this.value = today;
+        this.inputDate = today;
         this.generateCalendar(true);
-        this.onDateSelected.emit(today.format(this.options.format));
+        this.onDateSelected.emit(this.inputDate);
     }
 
     selectDate(e: MouseEvent, d: CalendarDate) {
         e.preventDefault();
 
-        let selectedDate = moment(`${d.day}.${d.month}.${d.year}`, 'DD.MM.YYYY');
-        this.value = selectedDate;
+        this.inputDate = moment(`${d.day}.${d.month}.${d.year}`, 'DD.MM.YYYY');
         this.generateCalendar(true);
         this.onDateSelected.emit(this.inputDate);
     }
