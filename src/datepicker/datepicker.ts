@@ -1,9 +1,7 @@
 import {
-    Component, ElementRef, forwardRef, OnInit, AfterViewInit, OnDestroy, Optional, Input, ViewChild, ContentChildren,
-    Injectable,
-    trigger, transition, style, animate, state
+    Component, ElementRef, OnInit, AfterViewInit, OnDestroy, Input
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor } from '@angular/forms';
 
 import { DatePickerContainerComponent } from '../datepicker-container/datepicker-container.component';
 import { Angular2DatepickerOptions } from '../datepicker-options';
@@ -25,7 +23,7 @@ export interface CalendarDate {
     selector: '',
     template: ''
 })
-export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     @Input() class: string;
     @Input() opened: boolean;
     @Input() options: Angular2DatepickerOptions = {};
@@ -33,16 +31,13 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
     protected datePicker: DatePickerContainerComponent;
 
     public date: any = moment();
-    private onChange: Function;
-    private onTouched: Function;
-    private el: Element;
     public viewDate: string = null;
     public weeks: Array<{ rowId?: number; days?: Array<CalendarDate> }>;
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
 
-    private onTouchedCallback: () => void = () => { };
-    private onChangeCallback: (_: any) => void = () => { };
+    public onTouchedCallback: () => void = () => { };
+    public onChangeCallback: (_: any) => void = () => { };
 
     private closePickerOnOutsideClick = (event: MouseEvent) => this.close(event);
     private closePickerOnTab = (event: KeyboardEvent) => this.closeOnTab(event);
@@ -58,11 +53,12 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
     set value(value: any) {
         let date = (value instanceof moment) ? value : moment(value, this.options.format);
         this.viewDate = date.isValid() ? date.format(this.options.viewFormat) : value;
-        this.onChangeCallback(value.format(this.options.format));
+
     }
 
     onDateSelected(date: moment.Moment) {
         this.value = date;
+        this.onChangeCallback(date.format(this.options.format));
         if (this.options.closeOnSelect) {
             this.close();
         }
@@ -133,12 +129,12 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
         if (!this.datePicker.opened) {
             this.open();
         } else {
-            //this.close();
+            // this.close();
         }
     }
 
     closeOnTab(event) {
-        if (event.keyCode == 9) {
+        if (event.keyCode === 9) {
             if (this.viewDate) {
                 this.value = moment(this.viewDate, this.options.viewFormat);
             }
@@ -155,20 +151,21 @@ export class DatePicker implements ControlValueAccessor, OnInit, AfterViewInit, 
         this.datePicker.inputDate = date.isValid() ? date : null;
         this.datePicker.open();
         window.addEventListener('click', this.closePickerOnOutsideClick, true);
-        window.addEventListener("keydown", this.closePickerOnTab, true);
+        window.addEventListener('keydown', this.closePickerOnTab, true);
     }
 
     close(event?: MouseEvent) {
         if (event && this.elRef.nativeElement.contains(event.target)) {
             return;
         }
-        window.removeEventListener("keydown", this.closePickerOnTab, true);
+        this.onTouchedCallback();
+        window.removeEventListener('keydown', this.closePickerOnTab, true);
         window.removeEventListener('click', this.closePickerOnOutsideClick, true);
         this.datePicker.close();
     }
 
     ngOnDestroy() {
-        window.removeEventListener("keydown", this.closePickerOnTab, true);
+        window.removeEventListener('keydown', this.closePickerOnTab, true);
         window.removeEventListener('click', this.closePickerOnOutsideClick, true);
     }
 }

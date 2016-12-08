@@ -1,9 +1,8 @@
 import {
-    Component, ElementRef, forwardRef, OnInit, Optional, Input, Output,
+    Component, ElementRef, Output,
     EventEmitter, NgZone, OnDestroy,
-    trigger, transition, style, animate, state
+    trigger, transition, style, animate
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Angular2DatepickerOptions } from '../datepicker-options';
 
 import * as moment from 'moment';
@@ -26,7 +25,7 @@ export interface Week {
 }
 
 @Component({
-    //moduleId: module.id,
+    // moduleId: module.id,
     selector: 'jb-datepicker-container',
     templateUrl: './datepicker-container.component.html',
     styleUrls: ['./datepicker-container.component.css'],
@@ -47,13 +46,11 @@ export class DatePickerContainerComponent implements OnDestroy {
 
     public opened: boolean = false;
     public date: moment.Moment = moment();
-    private el: Element;
     public inputDate: moment.Moment;
     public weeks: Array<Week>;
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
     public mqMatches: boolean;
-    private modalMediaQuery: string;
     private options: Angular2DatepickerOptions = {};
 
     public weekendHighlight: boolean;
@@ -85,7 +82,6 @@ export class DatePickerContainerComponent implements OnDestroy {
         }
         this.date = selectedMonthFlag && this.inputDate ? this.inputDate.clone() : moment(this.date);
         let month = this.date.month();
-        let year = this.date.year();
         let firstDay = this.date.clone().startOf('month');
         let offset = null;
         if (this.firstWeekdaySunday) {

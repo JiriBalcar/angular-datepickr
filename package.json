@@ -1,6 +1,6 @@
 {
   "name": "angular2-datepickr",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Angular2 Datepicker",
   "main": "angular2-datepickr.ts",
   "repository": {
@@ -25,20 +25,21 @@
   "author": "Jiri Balcar <j.balcar.dc@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@angular/common": "^2.0.1",
-    "@angular/compiler": "^2.0.1",
-    "@angular/compiler-cli": "^2.1.1",
-    "@angular/core": "^2.0.1",
-    "@angular/forms": "^2.0.1",
-    "@angular/platform-browser": "^2.0.1",
-    "@types/moment": "^2.11.29",
+    "@angular/common": "^2.2.4",
+    "@angular/compiler": "^2.2.4",
+    "@angular/compiler-cli": "^2.2.4",
+    "@angular/core": "^2.2.4",
+    "@angular/forms": "^2.2.4",
+    "@angular/platform-browser": "^2.2.4",
     "@types/node": "^6.0.42",
-    "moment": "^2.15.2",
-    "node-sass": "^3.10.1",
+    "codelyzer": "^2.0.0-beta.1",
+    "moment": "^2.17.1",
+    "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
     "rxjs": "5.0.0-beta.12",
-    "typescript": "^2.0.3",
-    "zone.js": "0.6.25"
+    "tslint": "4.0.2",
+    "typescript": "^2.0.10",
+    "zone.js": "^0.6.21"
   },
   "dependencies": {}
 }
