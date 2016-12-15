@@ -1,14 +1,14 @@
 {
-  "name": "angular2-datepickr",
+  "name": "angular-datepickr",
   "version": "0.3.6",
-  "description": "Angular2 Datepicker",
-  "main": "angular2-datepickr.ts",
+  "description": "Angular Datepicker",
+  "main": "angular-datepickr.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JiriBalcar/angular2-datepicker.git"
+    "url": "git+https://github.com/JiriBalcar/angular-datepickr.git"
   },
   "bugs": {
-    "url": "https://github.com/JiriBalcar/angular2-datepicker/issues"
+    "url": "https://github.com/JiriBalcar/angular-datepickr/issues"
   },
   "scripts": {
     "prepublish": "npm run build-css && ngc",
@@ -17,7 +17,6 @@
   },
   "keywords": [
     "angular",
-    "angular2",
     "datepicker",
     "date",
     "directive"

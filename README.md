@@ -1,7 +1,7 @@
-# Angular2-datepickr
-Angular2 Datepicker Component
+# Angular-datepickr
+Angular Datepicker Component
 
-***angular2-datepickr*** is a datepicker component for Angular2.
+***angular-datepickr*** is a datepicker component for Angular 2.0.0+.
 
 ## Demo
 
@@ -16,15 +16,15 @@ Modal
 Required libraries:
 ***moment.js***
 
-Install angular2-datepickr via `npm`
+Install angular-datepickr via `npm`
 
 ````shell
-npm install angular2-datepickr --save
+npm install angular-datepickr --save
 ````
 
 ## Usage
 ```javascript
-import { Angular2DatepickerModule } from 'angular2-datepickr/angular2-datepickr';
+import { AngularDatepickerModule } from 'angular-datepickr/angular-datepickr';
 
 @NgModule({
     declarations: [
@@ -34,7 +34,7 @@ import { Angular2DatepickerModule } from 'angular2-datepickr/angular2-datepickr'
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        Angular2DatepickerModule
+        AngularDatepickerModule
     ],
     providers: [],
     bootstrap: [AppComponent]
@@ -53,7 +53,7 @@ export class AppModule {
 **Global configuration**
 
 ```javascript
-Angular2DatepickerModule.forRoot(new Angular2DatepickerOptions({ todayString: 'DNES', modalMediaQuery: 'max-width: 750px' }))
+AngularDatepickerModule.forRoot(new AngularDatepickerOptions({ todayString: 'DNES', modalMediaQuery: 'max-width: 750px' }))
 ```
 
 **Local configuration**

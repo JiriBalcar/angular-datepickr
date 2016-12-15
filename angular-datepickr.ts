@@ -6,7 +6,7 @@ import { DatePickerComponent } from './src/datepicker/datepicker';
 import { DatePickerContainerComponent } from './src/datepicker-container/datepicker-container.component';
 import { InputDatePickerComponent } from './src/input-datepicker/input-datepicker.component';
 import { TextDatePickerComponent } from './src/text-datepicker/text-datepicker.component';
-import { Angular2DatepickerOptions } from './src/datepicker-options';
+import { AngularDatepickerOptions } from './src/datepicker-options';
 
 export { DatePickerComponent } from './src/datepicker/datepicker';
 export { DatePickerContainerComponent } from './src/datepicker-container/datepicker-container.component';
