@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class Angular2DatepickerOptions {
+export class AngularDatepickerOptions {
   format?: string = 'DD.MM.YYYY';
   viewFormat?: string = 'DD.MM.YYYY';
   firstWeekdaySunday?: boolean = false;

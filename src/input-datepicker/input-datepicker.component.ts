@@ -1,8 +1,8 @@
 import {
     Component, ElementRef, forwardRef, Optional, ViewChild, Input
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
-import { Angular2DatepickerOptions } from '../datepicker-options';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AngularDatepickerOptions } from '../datepicker-options';
 import { DatePickerComponent } from '../datepicker/datepicker';
 import { DatePickerContainerComponent } from '../datepicker-container/datepicker-container.component';
 
@@ -26,7 +26,7 @@ export class InputDatePickerComponent extends DatePickerComponent {
     @Input() options: any;
 
     constructor(protected elRef: ElementRef,
-        @Optional() protected opts: Angular2DatepickerOptions) {
+        @Optional() protected opts: AngularDatepickerOptions) {
         super(elRef, opts);
     }
 

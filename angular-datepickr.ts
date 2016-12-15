@@ -12,7 +12,7 @@ export { DatePickerComponent } from './src/datepicker/datepicker';
 export { DatePickerContainerComponent } from './src/datepicker-container/datepicker-container.component';
 export { InputDatePickerComponent } from './src/input-datepicker/input-datepicker.component';
 export { TextDatePickerComponent } from './src/text-datepicker/text-datepicker.component';
-export { Angular2DatepickerOptions } from './src/datepicker-options';
+export { AngularDatepickerOptions } from './src/datepicker-options';
 
 @NgModule({
     imports: [
@@ -34,12 +34,12 @@ export { Angular2DatepickerOptions } from './src/datepicker-options';
         TextDatePickerComponent
     ]
 })
-export class Angular2DatepickerModule {
-    static forRoot(config: Angular2DatepickerOptions): ModuleWithProviders {
+export class AngularDatepickerModule {
+    static forRoot(config: AngularDatepickerOptions): ModuleWithProviders {
         return {
-            ngModule: Angular2DatepickerModule,
+            ngModule: AngularDatepickerModule,
             providers: [
-                { provide: Angular2DatepickerOptions, useValue: config }
+                { provide: AngularDatepickerOptions, useValue: config }
             ]
         };
     }

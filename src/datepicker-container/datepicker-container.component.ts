@@ -3,7 +3,7 @@ import {
     EventEmitter, NgZone, OnDestroy,
     trigger, transition, style, animate
 } from '@angular/core';
-import { Angular2DatepickerOptions } from '../datepicker-options';
+import { AngularDatepickerOptions } from '../datepicker-options';
 
 import * as moment from 'moment';
 
@@ -51,7 +51,7 @@ export class DatePickerContainerComponent implements OnDestroy {
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
     public mqMatches: boolean;
-    private options: Angular2DatepickerOptions = {};
+    private options: AngularDatepickerOptions = {};
 
     public weekendHighlight: boolean;
     public todayHighlight: boolean;
@@ -71,7 +71,7 @@ export class DatePickerContainerComponent implements OnDestroy {
         private zone: NgZone) {
     }
 
-    mergeOptions(options: Angular2DatepickerOptions) {
+    mergeOptions(options: AngularDatepickerOptions) {
         Object.assign(this.options, options);
     }
 

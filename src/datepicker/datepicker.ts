@@ -4,7 +4,7 @@ import {
 import { ControlValueAccessor } from '@angular/forms';
 
 import { DatePickerContainerComponent } from '../datepicker-container/datepicker-container.component';
-import { Angular2DatepickerOptions } from '../datepicker-options';
+import { AngularDatepickerOptions } from '../datepicker-options';
 
 import * as moment from 'moment';
 
@@ -26,7 +26,7 @@ export interface CalendarDate {
 export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     @Input() class: string;
     @Input() opened: boolean;
-    @Input() options: Angular2DatepickerOptions = {};
+    @Input() options: AngularDatepickerOptions = {};
 
     protected datePicker: DatePickerContainerComponent;
 
@@ -43,7 +43,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterV
     private closePickerOnTab = (event: KeyboardEvent) => this.closeOnTab(event);
 
     constructor(protected elRef: ElementRef,
-        protected opts: Angular2DatepickerOptions) {
+        protected opts: AngularDatepickerOptions) {
     }
 
     get value(): any {
