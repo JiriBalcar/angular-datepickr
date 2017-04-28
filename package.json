@@ -1,8 +1,9 @@
 {
   "name": "angular-datepickr",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Angular Datepicker",
-  "main": "angular-datepickr.ts",
+  "es2015": "dist/angular-datepickr.js",
+  "main": "dist/angular-datepickr.es5.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JiriBalcar/angular-datepickr.git"
@@ -11,8 +12,7 @@
     "url": "https://github.com/JiriBalcar/angular-datepickr/issues"
   },
   "scripts": {
-    "prepublish": "npm run build-css && ngc",
-    "watch": "nodemon -i **/*.d.ts -w src -e scss,ts -x \"npm run prepublish\"",
+    "buid": "",
     "build-css": "node-sass src -o src --output-style compressed -q"
   },
   "keywords": [
@@ -24,21 +24,26 @@
   "author": "Jiri Balcar <j.balcar.dc@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@angular/common": "^2.2.4",
-    "@angular/compiler": "^2.2.4",
-    "@angular/compiler-cli": "^2.2.4",
-    "@angular/core": "^2.2.4",
-    "@angular/forms": "^2.2.4",
-    "@angular/platform-browser": "^2.2.4",
+    "@angular/common": "^4.1.0",
+    "@angular/compiler": "^4.1.0",
+    "@angular/compiler-cli": "^4.1.0",
+    "@angular/core": "^4.1.0",
+    "@angular/forms": "^4.1.0",
+    "@angular/platform-browser": "^4.1.0",
     "@types/node": "^6.0.42",
-    "codelyzer": "^2.0.0-beta.1",
-    "moment": "^2.17.1",
-    "node-sass": "^3.13.0",
+    "codelyzer": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-embed-templates": "^2.3.0",
+    "gulp-inline-ng2-styles": "^0.0.1",
+    "gulp-inline-ng2-template": "^4.0.0",
+    "moment": "^2.18.1",
+    "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
-    "rxjs": "5.0.0-beta.12",
-    "tslint": "4.0.2",
-    "typescript": "^2.0.10",
-    "zone.js": "^0.6.21"
+    "rollup": "^0.41.6",
+    "rxjs": "5.3.0",
+    "tslint": "5.1.0",
+    "typescript": "^2.3.1",
+    "zone.js": "^0.8.9"
   },
   "dependencies": {}
 }

@@ -39,8 +39,10 @@ export class InputDatePickerComponent extends DatePickerComponent {
     }
 
     toggle(event?: MouseEvent) {
-        event.preventDefault();
-        event.stopPropagation();
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
         if (!this.datePicker.opened) {
             if (this.viewDate) {
                 this.inputEl.nativeElement.setSelectionRange(0, this.viewDate.length);

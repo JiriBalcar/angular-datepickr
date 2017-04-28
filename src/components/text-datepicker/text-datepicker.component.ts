@@ -13,7 +13,6 @@ export const CALENDAR_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  // moduleId: module.id,
   selector: 'jb-text-datepicker',
   templateUrl: './text-datepicker.component.html',
   styleUrls: ['./text-datepicker.component.css'],

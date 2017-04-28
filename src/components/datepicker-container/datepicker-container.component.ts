@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { AngularDatepickerOptions } from '../datepicker-options';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 export interface CalendarDate {
     day: number;
@@ -25,7 +25,6 @@ export interface Week {
 }
 
 @Component({
-    // moduleId: module.id,
     selector: 'jb-datepicker-container',
     templateUrl: './datepicker-container.component.html',
     styleUrls: ['./datepicker-container.component.css'],
@@ -51,7 +50,7 @@ export class DatePickerContainerComponent implements OnDestroy {
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
     public mqMatches: boolean;
-    private options: AngularDatepickerOptions = {};
+    public options: AngularDatepickerOptions = {};
 
     public weekendHighlight: boolean;
     public todayHighlight: boolean;
@@ -83,7 +82,7 @@ export class DatePickerContainerComponent implements OnDestroy {
         this.date = selectedMonthFlag && this.inputDate ? this.inputDate.clone() : moment(this.date);
         let month = this.date.month();
         let firstDay = this.date.clone().startOf('month');
-        let offset = null;
+        let offset;
         if (this.firstWeekdaySunday) {
             offset = firstDay.day() === 0 ? 7 : firstDay.day();
         } else {
@@ -98,7 +97,7 @@ export class DatePickerContainerComponent implements OnDestroy {
         let selectedDate = this.inputDate;
 
         for (let i = 1; i <= rows; i += 1) {
-            let days = [];
+            let days: Array<any> = [];
             for (let i = 1; i <= 7; i += 1) {
                 let today = (moment().isSame(currentDate, 'day') && moment().isSame(currentDate, 'month')) ? true : false;
                 let weekend = (moment(currentDate).day() == 6) || (moment(currentDate).day() == 0);

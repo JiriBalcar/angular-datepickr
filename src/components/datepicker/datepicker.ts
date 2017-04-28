@@ -6,7 +6,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { DatePickerContainerComponent } from '../datepicker-container/datepicker-container.component';
 import { AngularDatepickerOptions } from '../datepicker-options';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 export interface CalendarDate {
     day: number;
@@ -31,7 +31,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterV
     protected datePicker: DatePickerContainerComponent;
 
     public date: any = moment();
-    public viewDate: string = null;
+    public viewDate: string | null = null;
     public weeks: Array<{ rowId?: number; days?: Array<CalendarDate> }>;
     public weekDayNames: Array<string>;
     public days: Array<any> = [];

@@ -11,10 +11,4 @@ export class AngularDatepickerOptions {
   weekendHighlight?: boolean = true;
   closeOnSelect?: boolean = true;
   modalMediaQuery?: string;
-
-  constructor(options?: Object) {
-    if (options) {
-      Object.assign(this, options);
-    }
-  }
 }

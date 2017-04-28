@@ -1,7 +1,7 @@
 # Angular-datepickr
 Angular Datepicker Component
 
-***angular-datepickr*** is a datepicker component for Angular 2.0.0+.
+***angular-datepickr*** is a datepicker component for Angular 2+
 
 ## Demo
 
@@ -24,7 +24,7 @@ npm install angular-datepickr --save
 
 ## Usage
 ```javascript
-import { AngularDatepickerModule } from 'angular-datepickr/angular-datepickr';
+import { AngularDatepickerModule } from 'angular-datepickr/dist';
 
 @NgModule({
     declarations: [
@@ -53,7 +53,18 @@ export class AppModule {
 **Global configuration**
 
 ```javascript
-AngularDatepickerModule.forRoot(new AngularDatepickerOptions({ todayString: 'DNES', modalMediaQuery: 'max-width: 750px' }))
+export const datepickerGlobalOptions: AngularDatepickerOptions = {
+    todayString: 'DNES',
+    modalMediaQuery: 'max-width: 550px',
+    format: 'DD.MM.YYYY',
+    viewFormat: 'DD.MM.YYYY',
+    firstWeekdaySunday: false,
+    todayButtonEnabled: true,
+    todayHighlight: true,
+    weekendHighlight: true,
+    closeOnSelect: true
+}
+AngularDatepickerModule.forRoot(datepickerGlobalOptions)
 ```
 
 **Local configuration**

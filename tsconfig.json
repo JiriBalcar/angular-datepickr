@@ -1,22 +1,13 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
     "experimentalDecorators": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "rootDir": ".",
-    "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ]
-  },
-  "angularCompilerOptions": {
-    "genDir": "compiled"
+    "rootDir": "./src",
+    "lib": ["es2015", "dom"],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    // don't auto-discover @types/node, it results in a ///<reference in the .d.ts output
+    "types": []
   }
 }
