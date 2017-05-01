@@ -35,6 +35,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterV
     public weeks: Array<{ rowId?: number; days?: Array<CalendarDate> }>;
     public weekDayNames: Array<string>;
     public days: Array<any> = [];
+    public disabled = false;
 
     public onTouchedCallback: () => void = () => { };
     public onChangeCallback: (_: any) => void = () => { };
@@ -123,6 +124,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterV
 
     registerOnTouched(fn: any) {
         this.onTouchedCallback = fn;
+    }
+
+    setDisabledState(isDisabled: boolean) : void {
+        this.disabled = isDisabled;
     }
 
     toggle() {

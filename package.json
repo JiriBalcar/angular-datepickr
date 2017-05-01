@@ -1,6 +1,6 @@
 {
   "name": "angular-datepickr",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Angular Datepicker",
   "es2015": "dist/angular-datepickr.js",
   "main": "dist/angular-datepickr.es5.js",

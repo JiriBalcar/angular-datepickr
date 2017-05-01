@@ -1,6 +1,6 @@
 {
   "name": "angular-datepickr",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": "Jiri Balcar <j.balcar.dc@gmail.com>",
   "license": "MIT",
   "module": "angular-datepickr.es5.js",
