@@ -11,4 +11,5 @@ export class AngularDatepickerOptions {
   weekendHighlight?: boolean = true;
   closeOnSelect?: boolean = true;
   modalMediaQuery?: string;
+  localeString?: string = 'en';
 }
