@@ -104,7 +104,13 @@ export class DatePickerComponent implements ControlValueAccessor, OnInit, AfterV
             } else {
                 this.options.closeOnSelect = this.options.closeOnSelect.toString() === 'true';
             }
+			if (typeof this.options.localeString === 'undefined') {
+                this.options.localeString = this.opts.localeString;
+            }
         }
+		
+		moment.locale(this.options.localeString);
+		
         this.datePicker.mergeOptions(this.options);
     }
 
